@@ -1,1 +1,1 @@
-# data-warehouse-training
+# Data Warehouse Training
