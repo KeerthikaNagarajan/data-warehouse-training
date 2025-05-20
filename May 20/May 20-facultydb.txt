@@ -1,0 +1,109 @@
+1. Switch to facultydb database
+test> use facultydb
+switched to db facultydb
+
+2. Create professors collection and insert documents
+facultydb> db.professors.insertMany([
+...   {
+...     name: "Dr. Kavita Iyer",
+...     subject: "Mathematics",
+...     experience: 10,
+...     active: true
+...   },
+...   {
+...     name: "Dr. Nikhil Sinha",
+...     subject: "Physics",
+...     experience: 5,
+...     active: false
+...   },
+...   {
+...     name: "Dr. Meera Das",
+...     subject: "Chemistry",
+...     experience: 8,
+...     active: true
+...   }
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('682c5e54506387b5ca6c4bd0'),
+    '1': ObjectId('682c5e54506387b5ca6c4bd1'),
+    '2': ObjectId('682c5e54506387b5ca6c4bd2')
+  }
+}
+
+3. Find all professors
+facultydb> db.professors.find()
+[
+  {
+    _id: ObjectId('682c5e54506387b5ca6c4bd0'),
+    name: 'Dr. Kavita Iyer',
+    subject: 'Mathematics',
+    experience: 10,
+    active: true
+  },
+  {
+    _id: ObjectId('682c5e54506387b5ca6c4bd1'),
+    name: 'Dr. Nikhil Sinha',
+    subject: 'Physics',
+    experience: 5,
+    active: false
+  },
+  {
+    _id: ObjectId('682c5e54506387b5ca6c4bd2'),
+    name: 'Dr. Meera Das',
+    subject: 'Chemistry',
+    experience: 8,
+    active: true
+  }
+]
+
+4. Find only active professors
+facultydb> db.professors.find({ active: true })
+[
+  {
+    _id: ObjectId('682c5e54506387b5ca6c4bd0'),
+    name: 'Dr. Kavita Iyer',
+    subject: 'Mathematics',
+    experience: 10,
+    active: true
+  },
+  {
+    _id: ObjectId('682c5e54506387b5ca6c4bd2'),
+    name: 'Dr. Meera Das',
+    subject: 'Chemistry',
+    experience: 8,
+    active: true
+  }
+]
+
+5. Update Physics professor's experience
+facultydb> db.professors.updateOne(
+...   { subject: "Physics" },
+...   { $set: { experience: 6 } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+6. Mark Physics professor as active
+facultydb> db.professors.updateOne(
+...   { subject: "Physics" },
+...   { $set: { active: true } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+
+7. Delete Chemistry professor
+facultydb> db.professors.deleteOne({ subject: "Chemistry" })
+{ acknowledged: true, deletedCount: 1 }
+
