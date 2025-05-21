@@ -1,0 +1,42 @@
+1. Create a new database called bugtracker
+test> use bugtracker
+
+2. Insert 3 bug reports into a bugs collection
+bugtracker> db.bugs.insertMany([
+...     {
+...         title: "Login page not loading",
+...         reportedly: "John Doe",
+...         status: "open",
+...         priority: "high",
+...         createdAt: new Date()
+...     },
+...     {
+...         title: "CSS alignment issue on mobile",
+...         reportedly: "Jane Smith",
+...         status: "in progress",
+...         priority: "medium",
+...         createdAt: new Date()
+...     },
+...     {
+...         title: "Test bug report",
+...         reportedly: "Test User",
+...         status: "open",
+...         priority: "low",
+...         createdAt: new Date()
+...     }
+... ])
+
+3. Query all bugs with status: "open" and priority: "high"
+bugtracker> db.bugs.find({
+...     status: "open",
+...     priority: "high"
+... })
+
+4. Update the status of a specific bug to "closed"
+bugtracker> db.bugs.updateOne(
+...     { title: "Login page not loading" },
+...     { $set: { status: "closed" } }
+... )
+
+5. Delete the bug that was reported by "Test User"
+bugtracker> db.bugs.deleteOne({ reportedly: "Test User" })
