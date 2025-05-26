@@ -1,0 +1,221 @@
+1. First, create and populate the collection
+// Switch to students database
+use students
+
+// Insert sample data
+db.students.insertMany([
+    {
+        "_id": ObjectId("507f1f77bcf86cd799439011"),
+        "name": "Ayaan Khan",
+        "age": 21,
+        "gender": "Male",
+        "department": "Computer Science",
+        "courses": [
+            {"name": "MongoDB", "score": 85},
+            {"name": "Python", "score": 90}
+        ],
+        "address": {
+            "city": "Hyderabad",
+            "state": "Telangana",
+            "pincode": 500032
+        },
+        "enrollmentDate": ISODate("2024-08-01T00:00:00Z"),
+        "isActive": true
+    },
+    {
+        "_id": ObjectId("507f1f77bcf86cd799439012"),
+        "name": "Jane Smith",
+        "age": 20,
+        "gender": "Female",
+        "department": "Mathematics",
+        "courses": [
+            {"name": "Calculus", "score": 88},
+            {"name": "MongoDB", "score": 82}
+        ],
+        "address": {
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": 560001
+        },
+        "enrollmentDate": ISODate("2024-09-15T00:00:00Z"),
+        "isActive": true
+    },
+    {
+        "_id": ObjectId("507f1f77bcf86cd799439013"),
+        "name": "John Doe",
+        "age": 22,
+        "gender": "Male",
+        "department": "Mechanical",
+        "courses": [
+            {"name": "Thermodynamics", "score": 75},
+            {"name": "CAD", "score": 80}
+        ],
+        "address": {
+            "city": "Chennai",
+            "state": "Tamil Nadu",
+            "pincode": 600001
+        },
+        "enrollmentDate": ISODate("2024-07-10T00:00:00Z"),
+        "isActive": false
+    }
+])
+
+-----------------------------------
+
+2. CRUD Operations
+// 1. Insert a new student
+db.students.insertOne({
+    "name": "Emily Chen",
+    "age": 19,
+    "gender": "Female",
+    "department": "Computer Science",
+    "courses": [
+        {"name": "Java", "score": 92},
+        {"name": "Algorithms", "score": 88}
+    ],
+    "address": {
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "pincode": 500034
+    },
+    "enrollmentDate": ISODate("2024-10-05T00:00:00Z"),
+    "isActive": true
+})
+
+// 2. Update Python score for Ayaan Khan
+db.students.updateOne(
+    {"name": "Ayaan Khan", "courses.name": "Python"},
+    {$set: {"courses.$.score": 95}}
+)
+
+// 3. Delete John Doe
+db.students.deleteOne({"name": "John Doe"})
+
+// 4. Find all Computer Science students
+db.students.find({"department": "Computer Science"})
+
+-----------------------------------
+
+3. Query Operators
+// 5. Find students older than 20
+db.students.find({"age": {$gt: 20}})
+
+// 6. Find students enrolled between dates
+db.students.find({
+    "enrollmentDate": {
+        $gte: ISODate("2024-01-01T00:00:00Z"),
+        $lte: ISODate("2024-12-31T23:59:59Z")
+    }
+})
+
+// 7. Find students in Computer Science or Mathematics
+db.students.find({
+    "department": {$in: ["Computer Science", "Mathematics"]}
+})
+
+// 8. Find students not in Mechanical department
+db.students.find({"department": {$ne: "Mechanical"}})
+
+// 9. Find students with course scores > 80
+db.students.find({"courses.score": {$gt: 80}})
+
+-----------------------------------
+
+4. Aggregation Framework
+// 10. Group by department and count students
+db.students.aggregate([
+    {$group: {_id: "$department", count: {$sum: 1}}}
+])
+
+// 11. Calculate average age per department
+db.students.aggregate([
+    {$group: {_id: "$department", avgAge: {$avg: "$age"}}}
+])
+
+// 12. Sort students by total course score
+db.students.aggregate([
+    {$project: {
+        name: 1,
+        totalScore: {$sum: "$courses.score"}
+    }},
+    {$sort: {totalScore: -1}}
+])
+
+// 13. Filter active students before aggregation
+db.students.aggregate([
+    {$match: {"isActive": true}},
+    {$group: {_id: "$department", count: {$sum: 1}}}
+])
+
+// 14. Group and list unique cities
+db.students.aggregate([
+    {$group: {_id: null, cities: {$addToSet: "$address.city"}}}
+])
+
+-----------------------------------
+
+5. Projections
+// 15. Show only name, department, and city
+db.students.find({}, {
+    "name": 1,
+    "department": 1,
+    "address.city": 1,
+    "_id": 0
+})
+
+// 16. Exclude _id field from output
+db.students.find({}, {"_id": 0})
+
+// 17. Show name and total score
+db.students.aggregate([
+    {$project: {
+        _id: 0,
+        name: 1,
+        totalScore: {$sum: "$courses.score"}
+    }}
+])
+
+-----------------------------------
+
+6. Embedded Documents
+// 18. Query students in Hyderabad
+db.students.find({"address.city": "Hyderabad"})
+
+// 19. Update address pincode for Ayaan Khan
+db.students.updateOne(
+    {"name": "Ayaan Khan"},
+    {$set: {"address.pincode": 500033}}
+)
+
+// 20. Add landmark field to all addresses
+db.students.updateMany(
+    {},
+    {$set: {"address.landmark": "Near City Center"}}
+)
+
+-----------------------------------
+
+7. Array Operations
+// 21. Add new course "Node.js" to Ayaan Khan
+db.students.updateOne(
+    {"name": "Ayaan Khan"},
+    {$push: {"courses": {"name": "Node.js", "score": 0}}}
+)
+
+// 22. Remove MongoDB course from Ayaan Khan
+db.students.updateOne(
+    {"name": "Ayaan Khan"},
+    {$pull: {"courses": {"name": "MongoDB"}}}
+)
+
+// 23. Find students in both Python and MongoDB
+db.students.find({
+    "courses.name": {$all: ["Python", "MongoDB"]}
+})
+
+// 24. Find students with MongoDB score > 80
+db.students.find({
+    "courses": {
+        $elemMatch: {"name": "MongoDB", "score": {$gt: 80}}
+    }
+})
