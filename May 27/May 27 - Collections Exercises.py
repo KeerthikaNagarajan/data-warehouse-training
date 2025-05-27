@@ -141,10 +141,6 @@ def student_grade_book():
     else:
         print("Student not found")
 
-# Uncomment to run the grade book interactively
-# print("\n14. Student Grade Book:")
-# student_grade_book()
-
 # 15. Merge Two Dictionaries
 def merge_dicts(dict1, dict2):
     merged = dict1.copy()
