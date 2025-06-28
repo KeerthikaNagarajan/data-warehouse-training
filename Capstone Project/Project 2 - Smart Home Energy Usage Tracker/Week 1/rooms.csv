@@ -1,0 +1,11 @@
+room_id,room_name,floor,area_sqft,purpose,occupancy_limit
+1,Room_1,1,230,Office,10
+2,Room_2,1,243,Kitchen,10
+3,Room_3,1,257,Office,4
+4,Room_4,1,241,Living,9
+5,Room_5,1,287,Living,8
+6,Room_6,2,121,Living,6
+7,Room_7,2,189,Office,10
+8,Room_8,2,128,Office,3
+9,Room_9,2,128,Office,3
+10,Room_10,2,186,Office,2

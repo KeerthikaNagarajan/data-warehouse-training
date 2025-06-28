@@ -1,0 +1,43 @@
+[
+  {
+    "receipt_id": 1,
+    "user_id": 1,
+    "date": "2023-10-01",
+    "amount": 50.00,
+    "merchant": "Grocery Store",
+    "category": "Food",
+    "items": ["Milk", "Eggs", "Bread"],
+    "payment_method": "Credit Card",
+    "scan": "base64_placeholder_1"
+  },
+  {
+    "receipt_id": 2,
+    "user_id": 1,
+    "date": "2023-10-02",
+    "amount": 20.00,
+    "merchant": "City Transit",
+    "category": "Transport",
+    "notes": "Monthly bus pass",
+    "scan": "base64_placeholder_2"
+  },
+  {
+    "receipt_id": 3,
+    "user_id": 2,
+    "date": "2023-10-03",
+    "amount": 15.99,
+    "merchant": "Netflix",
+    "category": "Entertainment",
+    "subscription_id": "NFX-7890",
+    "auto_renew": true
+  },
+  {
+    "receipt_id": 4,
+    "user_id": 1,
+    "date": "2023-10-05",
+    "amount": 75.30,
+    "merchant": "Whole Foods",
+    "category": "Food",
+    "items": ["Organic produce", "Cheese"],
+    "loyalty_points": 15
+  }
+]

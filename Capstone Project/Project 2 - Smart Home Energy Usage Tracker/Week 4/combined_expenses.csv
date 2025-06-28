@@ -1,0 +1,33 @@
+date,user,category,amount,month
+2023-10-01,Alice,Food,50.0,2023-10
+2023-10-02,Alice,Transport,20.0,2023-10
+2023-10-05,Alice,Food,75.3,2023-10
+2023-10-01,Alice,Rent,1200.0,2023-10
+2023-10-10,Alice,Insurance,120.0,2023-10
+2023-11-02,Alice,Food,60.4,2023-11
+2023-11-30,Alice,Education,65.0,2023-11
+2023-12-20,Alice,Entertainment,8.99,2023-12
+2023-10-03,Bob,Entertainment,15.99,2023-10
+2023-10-12,Bob,Healthcare,150.0,2023-10
+2023-10-25,Bob,Travel,300.0,2023-10
+2023-11-15,Bob,Entertainment,10.99,2023-11
+2023-12-03,Bob,Food,42.75,2023-12
+2023-12-22,Bob,Shopping,65.0,2023-12
+2023-10-15,Emma Johnson,Utilities,85.2,2023-10
+2023-10-22,Emma Johnson,Education,200.0,2023-10
+2023-11-20,Emma Johnson,Utilities,90.0,2023-11
+2023-12-01,Emma Johnson,Rent,1250.0,2023-12
+2023-10-18,Michael Chen,Shopping,89.99,2023-10
+2023-11-05,Michael Chen,Transport,35.5,2023-11
+2023-12-15,Michael Chen,Utilities,95.6,2023-12
+2023-10-30,Sarah Williams,Gifts,45.0,2023-10
+2023-11-12,Sarah Williams,Healthcare,75.0,2023-11
+2023-12-24,Sarah Williams,Gifts,30.0,2023-12
+2023-11-25,David Kim,Shopping,120.5,2023-11
+2023-12-05,David Kim,Insurance,85.0,2023-12
+2023-11-18,Lisa Wong,Travel,450.0,2023-11
+2023-12-10,Lisa Wong,Transport,18.5,2023-12
+2023-10-01,User 1,Food,50.0,2023-10
+2023-10-02,User 1,Transport,20.0,2023-10
+2023-10-03,User 2,Entertainment,15.99,2023-10
+2023-10-05,User 1,Food,75.3,2023-10

@@ -1,0 +1,11 @@
+device_id,usage_period,total_energy_kwh
+7,Peak,3.33
+6,Off-Peak,3.95
+4,Peak,2.2
+2,Off-Peak,1.12
+5,Off-Peak,2.54
+4,Off-Peak,3.24
+8,Off-Peak,0.55
+3,Off-Peak,1.75
+1,Off-Peak,4.1
+7,Off-Peak,0.75

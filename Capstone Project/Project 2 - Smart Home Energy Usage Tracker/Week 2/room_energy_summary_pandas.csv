@@ -1,0 +1,11 @@
+room_id,room_name,floor,area_sqft,purpose,total_energy_kwh
+1,Room_1,1,230,Office,12.629999999999999
+2,Room_2,1,243,Kitchen,26.98
+3,Room_3,1,257,Office,43.27
+4,Room_4,1,241,Living,10.67
+5,Room_5,1,287,Living,48.11
+6,Room_6,2,121,Living,12.98
+7,Room_7,2,189,Office,15.87
+8,Room_8,2,128,Office,16.150000000000002
+9,Room_9,2,128,Office,65.92
+10,Room_10,2,186,Office,78.33
