@@ -1,0 +1,26 @@
+trigger:
+  schedule:
+    - cron: "0 0 1 * *"  # runs 1st of every month
+      displayName: Monthly Run
+      branches:
+        include:
+          - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+
+  - script: |
+      pip install pandas
+      python week2/alert.py
+    displayName: 'Run Expense Script'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'output/monthly_summary.csv'
+      ArtifactName: 'Report'
+      publishLocation: 'Container'
