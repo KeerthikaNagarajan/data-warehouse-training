@@ -1,0 +1,33 @@
+trigger:
+  schedule:
+    - cron: "0 6 * * 1"  # Every Monday at 6 AM
+      displayName: Weekly Run
+      branches:
+        include:
+          - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dataPath: 'data/sensor_logs.csv'
+  reportPath: 'output/weekly_report.csv'
+  alertThreshold: 10  # kWh per device per day
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+
+- script: |
+    pip install pandas numpy
+    python scripts/data_cleaning.py $(dataPath)
+  displayName: 'Run data cleaning script'
+
+- script: |
+    python scripts/generate_summary.py --input $(dataPath) --output $(reportPath)
+  displayName: 'Generate weekly summary report'
+
+- script: |
+    python scripts/alert_threshold.py --input $(reportPath) --threshold $(alertThreshold)
+  displayName: 'Check for usage threshold breaches'
